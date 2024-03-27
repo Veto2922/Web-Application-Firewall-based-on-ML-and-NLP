@@ -43,10 +43,6 @@ The WAF project consists of two main stages:
 
 **Project Components:**
 
-
-![image](https://github.com/Veto2922/Web-Application-Firewall-based-on-ML-and-NLP/assets/114834171/f41c9147-b58e-4a96-8129-781498b6125f)
-
-
 1. **Classifier:**
    - The classifier module is responsible for processing HTTP requests and determining whether they are valid or malicious.
    - It utilizes machine learning algorithms trained on labeled datasets to classify incoming requests.
@@ -56,6 +52,8 @@ The WAF project consists of two main stages:
 2. **Web Application Firewall (WAF) Code:**
    - The WAF code intercepts incoming HTTP requests and passes them to the classifier for analysis.
    - Based on the classification results, it either forwards the requests to the server or drops them and triggers alerts.
+     
+   ![image](https://github.com/Veto2922/Web-Application-Firewall-based-on-ML-and-NLP/assets/114834171/f41c9147-b58e-4a96-8129-781498b6125f)
 
 3. **Request Handler:**
    - The request handler module manages the processing of requests and responses between the WAF, classifier, server, and database.
