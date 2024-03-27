@@ -1,0 +1,14 @@
+Flask==2.3.2
+Flask-Login==0.6.2
+Flask-SQLAlchemy==3.0.3
+joblib==1.2.0
+numpy==1.24.3
+pandas==2.0.1
+pymongo==4.3.3
+waitress
+python-dotenv==1.0.0
+requests==2.31.0
+scikit-learn==1.2.2
+SQLAlchemy==2.0.15
+gunicorn
+twilio

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="E:\Flask cours\Flask-Web-App-Tutorial-main\website\static\css\style.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <!-- <link rel="stylesheet" href="/static/css/style2.css" /> -->
+
+    <title>{% block title %}Home{% endblock %}</title>
+  </head>
+
+  <body
+    class="img js-fullheight"
+    style="background-image: url('/static/img/5.jpg')"
+  >
+    <!-- <img src="{{url_for('static', filename='bg.jpg')}}" align="middle" /> -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark"
+      style="background-color: #181c1f"
+    >
+      <img
+        src="/static/img/logo.png"
+        width="60px"
+        height="40px"
+        id="logo"
+        alt="Logo image"
+        style="margin-left: 10px; border-radius: 10px"
+      />
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div
+        class="collapse navbar-collapse"
+        id="navbar"
+        style="background-color: #151a1a"
+      >
+        <div class="navbar-nav" style="background-color: #151a1a">
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" id="login" href="/login">Login</a>
+          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <!--Flash massages style-->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category =='error'
+    %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+    <div class="container">{% block content %} {% endblock %}</div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    {% block javascript %}
+    <script type="text/javascript">
+      function deleteNote(noteId) {
+        fetch("/delete-note", {
+          method: "POST",
+          body: JSON.stringify({ noteId: noteId }),
+        }).then((_res) => {
+          window.location.href = "/";
+        });
+      }
+    </script>
+    {% endblock %}
+
+    <footer class="footer">
+      <div class="footer__content">
+        <section class="left">
+          <p class="footer__item">Made by:</p>
+          <a
+            href="https://www.linkedin.com/in/abdelrahman-mohamed-28649120b/"
+            target="_blank"
+            class="footer__item"
+            >Abdelrahman Mohamed
+          </a>
+          <a
+            href="https://www.linkedin.com/in/mohamed-ashour-09aa70248/"
+            target="blank"
+            class="footer_item"
+            >Mohamed Ashour</a
+          >
+          <a
+            href="https://www.linkedin.com/in/ahmed-khaled-7a340b198"
+            target="blank"
+            class="footer_item"
+            >Ahmed Khaled</a
+          >
+          <a
+            href="https://www.linkedin.com/in/yara-adham-8b4311250/"
+            target="blank"
+            class="footer_item"
+            >Yara Adhma</a
+          >
+          <a
+            href="https://github.com/Veto2922"
+            target="_blank"
+            class="footer__item"
+            >Check out our other projects</a
+          >
+        </section>
+        <section class="right">
+          <div class="footer__column">
+            <a class="footer__item">Recent</a>
+            <a class="footer__item">Calendar</a>
+          </div>
+          <div class="footer__column">
+            <a class="footer__item">About</a>
+            <a
+              class="footer__item"
+              href="https://github.com/Veto2922/WAF_APP3"
+              ,target="_blank"
+              >How this was made</a
+            >
+          </div>
+        </section>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  *,
+  *::after,
+  *::before {
+    box-sizing: inherit;
+  }
+
+  body {
+    box-sizing: border-box;
+  }
+
+  .footer {
+    background-color: #151a1a;
+    padding: 40px 0;
+    margin-top: 50px;
+    border-top: 4px solid black;
+    color: white;
+    font-size: 12px;
+    margin-top: 400px;
+  }
+
+  .footer__content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .footer .left {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer .right {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .footer__column {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+  }
+
+  .footer__item {
+    margin-bottom: 5px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .footer__item:hover {
+    text-decoration: underline;
+  }
+
+  .form {
+    color: white;
+    background: #343030;
+    background: -webkit-linear-gradient(to right, #267871, #136a8a);
+    background: linear-gradient(to right, #1e2423, #0c3f51);
+    margin: auto;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2),
+      0px 10px 20px rgba(0, 0, 0, 0.3), 0px 30px 60px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    padding: 60px;
+    max-width: 50%;
+    margin-top: 50px;
+    opacity: 0.9;
+
+    /* This shadow is separated from the edges by 0.75rem, and shrunk by 0.2rem on the
+    top and bottom. */
+    box-shadow: 0.75rem 0.75rem 0 -0.2rem var(--accent-colour);
+    background-color: #645959;
+    border-radius: 20px;
+  }
+
+  /* When the field is in focus, we change the border colour at the bottom to the accent colour */
+  .form__field:focus {
+    border-bottom: var(--border);
+  }
+
+  .form__small {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+  }
+
+  .form__link {
+    text-decoration: none;
+    color: var(--accent-colour);
+  }
+
+  .form__link:hover {
+    color: #d05656;
+  }
+
+  .form__error {
+    margin-top: 0.5rem;
+  }
+
+  .form__error,
+  .form__flash {
+    display: block;
+    padding: 0.5rem;
+    color: var(--text);
+  }
+
+  .form__error,
+  .form__flash--danger {
+    background: var(--accent-colour);
+  }
+
+  .form__flash {
+    margin: 0.5rem;
+  }
+
+  .form__flash--success {
+    background: var(--accent-colour-2);
+  }
+
+  .forgot {
+    text-decoration: none;
+    color: white;
+    float: right;
+  }
+
+  /* Styles specific to the form buttons */
+  .button--form {
+    background: none;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0px 0px 0px 2px white;
+    border-radius: 3px;
+    padding: 5px 2em;
+    transition: 0.5s;
+
+    float: right;
+    margin-bottom: 50px;
+  }
+
+  .button--form:hover {
+    background: rgb(68, 206, 18);
+    color: dimgray;
+    transition: 0.5s;
+  }
+
+  body {
+    background-image: url("/static/theoreticala.jpg");
+  }
+  .head1 {
+    color: rgb(240, 4, 51);
+    width: auto;
+    font-size: 4rem;
+  }
+  .head2 {
+    color: rgb(22, 29, 243);
+    width: auto;
+    font-size: 2rem;
+  }
+
+  .heades {
+    margin-top: 50px;
+  }
+
+  .icon1 {
+    justify-content: center;
+
+    width: 20%;
+    margin-left: 2%;
+
+    padding: 5px;
+    border-radius: 20px;
+  }
+  .icon2 {
+    justify-content: center;
+
+    width: 20%;
+    padding: 5px;
+    border-radius: 20px;
+  }
+  .icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .vl {
+    border-left: 2px solid rgb(11, 11, 11);
+    height: 100px;
+    margin: 5px;
+  }
+
+  .contaner1 {
+    color: white;
+    background: hsl(188, 100%, 37%, 0.2);
+    background-image: url("/static/img/1.jpg");
+    background: -webkit-linear-gradient(to right, #267871, #136a8a);
+    background: linear-gradient(to right, #267871, #136a8a);
+    margin: auto;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2),
+      0px 10px 20px rgba(0, 0, 0, 0.3), 0px 30px 60px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    padding: 50px;
+    opacity: 0.7;
+  }
+  .headss {
+    margin: 50px 40px;
+  }
+</style>
