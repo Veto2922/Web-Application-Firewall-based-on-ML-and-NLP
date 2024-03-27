@@ -42,6 +42,8 @@ The WAF project consists of two main stages:
 ---
 
 **Project Components:**
+
+
 ![image](https://github.com/Veto2922/Web-Application-Firewall-based-on-ML-and-NLP/assets/114834171/f41c9147-b58e-4a96-8129-781498b6125f)
 
 
